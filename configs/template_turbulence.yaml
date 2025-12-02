@@ -1,0 +1,30 @@
+# TEMPLATE: Turbulence dataset configuration
+# Kopiera denna fil till t.ex. configs/min_turbulens.yaml och justera fälten.
+
+dataset: "CustomTurbulenceData"
+domain: "turbulence"
+
+# Rotkatalog för detta dataset (relativt repo-roten)
+data_root: "data/HIT"
+
+# Filnamn relativt data_root
+files:
+  velocity_raw: "raw/vel1024.bin"
+  metadata_raw: "raw/meta.json"
+
+# All metadata som krävs för att tolka velocity_raw korrekt
+metadata:
+  nx: 1024          # antal gridpunkter i x-led
+  ny: 1024          # antal gridpunkter i y-led
+  nz: 1024          # antal gridpunkter i z-led
+  datatype: "float32"
+  endianness: "little"
+  domain_size: 2.0  # t.ex. 2π eller 1.0, beroende på simuleringen
+
+# LFDE-inställningar (diskreta vågtal/skalfaktorer)
+lfde:
+  ks_values: [0.01, 0.03, 0.1, 0.3, 1.0, 3.0, 10.0]
+
+  # Resultatfiler
+  output_csv: "results/user_submitted_runs/custom_turbulence_lfde.csv"
+  output_plot: "results/user_submitted_runs/custom_turbulence_lfde.png"
