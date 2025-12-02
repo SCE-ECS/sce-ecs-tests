@@ -24,3 +24,6 @@ def main():
 
     print(f"Saved CSV to {output_csv}")
     print(f"Saved plot to {output_plot}")
+
+if __name__ == "__main__":
+    main()
