@@ -1,0 +1,28 @@
+dataset: "Planck_PR4_SMICA_TQU"
+domain: "cmb"
+
+# Rotmappen där användaren lägger Planck PR4-filerna
+data_root: "data/Planck_pr4"
+
+files:
+  T_map: "raw/pr4_smica_T.fits"
+  Q_map: "raw/pr4_smica_Q.fits"
+  U_map: "raw/pr4_smica_U.fits"
+
+metadata:
+  # Typiska värden för Planck PR4 SMICA (kan justeras senare vid behov)
+  nside: 2048
+  component_separation: "SMICA"
+  frequency_ghz: 143
+  beam_fwhm_arcmin: 5.0
+  coordinate_frame: "galactic"
+
+  # Gemensam mask (kan peka på t.ex. en PR4 common mask)
+  mask: "processed/planck_common_mask.fits"
+
+lfde:
+  # Diskreta "skalor" / multipol- eller k-bins för CMB-LFDE
+  ks_values: [50, 100, 200, 400, 800, 1600]
+
+  output_csv: "results/user_submitted_runs/planck_pr4_smica_lfde.csv"
+  output_plot: "results/user_submitted_runs/planck_pr4_smica_lfde.png"
