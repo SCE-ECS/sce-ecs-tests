@@ -1,0 +1,23 @@
+# configs/turbulence_hit.yaml
+dataset: "HIT_isotropic1024"
+domain: "turbulence"
+
+# Rot för detta dataset, relativt repo-roten
+data_root: "data/HIT"
+
+subdirs:
+  raw: "raw"
+  processed: "processed"
+
+files:
+  # EXEMPEL – byt till dina faktiska filnamn senare
+  velocity_raw: "raw/hit_isotropic1024_velocity.bin"
+  metadata_raw: "raw/hit_isotropic1024_meta.json"
+
+lfde:
+  # Diskreta k-värden för LFDE-reciprocitet (kan justeras, men är *fördefinierade*
+  ks_values: [0.01, 0.03, 0.1, 0.3, 1.0, 3.0, 10.0]
+
+  # Vart resultaten ska skrivas
+  output_csv: "results/sample_runs/hit_lfde_reciprocity.csv"
+  output_plot: "results/sample_runs/hit_lfde_reciprocity.png"
