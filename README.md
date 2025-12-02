@@ -54,9 +54,9 @@ sce-ecs-tests/
   README.md
   requirements.txt
 
-## Notebooks (Google Colab entry points)
+## 2. Notebooks (Google Colab entry points)
 
-Följande notebooks finns under `notebooks/` som färdiga Tier-3 ingångar:
+Följande notebooks finns under `notebooks/` som färdiga Tier-3-ingångar:
 
 - `01_turbulence_lfde_colab.ipynb`  
   Kör LFDE-reciprocitetstestet på en HIT-liknande turbulensdataset
@@ -64,11 +64,12 @@ Följande notebooks finns under `notebooks/` som färdiga Tier-3 ingångar:
 
 - `02_wmap_lfde_colab.ipynb`  
   Kör den CMB-specifika LFDE-pipelinen på en WMAP W-band T/Q/U-dataset
-  via `configs/wmap_wband_TQU.yaml`.
-  Kräver att användaren placerar WMAP-FITS-filer i `data/WMAP/...` enligt config.
+  via `configs/wmap_wband_TQU.yaml`.  
+  Kräver att användaren placerar WMAP-FITS-filer i `data/WMAP/...`
+  enligt konfigurationen.
 
 - `03_planck_pr4_lfde_colab.ipynb`  
   Kör samma CMB-pipeline på en Planck PR4 SMICA T/Q/U-dataset
-  via `configs/planck_pr4_smica_TQU.yaml`.
-  Kräver att användaren placerar Planck PR4-FITS-filer i `data/Planck_pr4/...` enligt config.
-
+  via `configs/planck_pr4_smica_TQU.yaml`.  
+  Kräver att användaren placerar Planck PR4-FITS-filer i
+  `data/Planck_pr4/...` enligt konfigurationen.
