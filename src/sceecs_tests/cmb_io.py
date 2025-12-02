@@ -1,68 +1,39 @@
 from pathlib import Path
-from typing import Dict, Any
-
-import numpy as np
 import healpy as hp
+import numpy as np
 
-
-def load_cmb_dataset(cfg: Dict[str, Any]) -> Dict[str, np.ndarray]:
+def load_cmb_dataset(cfg):
     """
-    Laddar ett CMB-dataset (WMAP/Planck-liknande) baserat på YAML-konfigurationen.
+    Laddar en WMAP/Planck-liknande CMB-dataset enligt config-filen.
 
-    Förväntad struktur i cfg:
-      domain: "cmb"
-      data_root: "data/WMAP" eller "data/Planck_pr4" etc.
-      files:
-        T_map: "raw/....fits"  (valfritt men starkt rekommenderat)
-        Q_map: "raw/....fits"  (valfritt)
-        U_map: "raw/....fits"  (valfritt)
-      metadata:
-        nside: <int>
-        mask: "processed/...mask.fits" (valfritt)
-        ... (övriga fält ignoreras av denna funktion)
-
-    Returnerar en dict:
-      {
-        "T": np.ndarray eller None,
-        "Q": np.ndarray eller None,
-        "U": np.ndarray eller None,
-        "mask": np.ndarray eller None,
-        "nside": int
-      }
-
-    OBS: Denna funktion implementerar bara IO och grundläggande kontroll.
-         Själva LFDE-metriken för CMB ligger i metrics.lfde_reciprocity.
+    Returnerar en dict med keys: T, Q, U, mask, nside
     """
-    if cfg.get("domain") != "cmb":
-        raise ValueError(f"Expected domain 'cmb' in config, got: {cfg.get('domain')}")
-
     data_root = Path(cfg["data_root"])
-    files = cfg.get("files", {})
-    meta = cfg.get("metadata", {})
+    files = cfg["files"]
+    meta = cfg["metadata"]
 
-    nside = int(meta.get("nside", 0))
-    if nside <= 0:
-        raise ValueError("metadata.nside måste vara satt till ett positivt heltal för CMB-dataset.")
+    nside = int(meta["nside"])
 
-    def _read_map_if_present(key: str):
+    # Hjälpfunktion: läs karta om den finns
+    def load_map(key):
         if key not in files:
             return None
         path = data_root / files[key]
         if not path.exists():
-            raise FileNotFoundError(f"CMB-fil saknas: {path}")
+            raise FileNotFoundError(f"Filen hittades inte: {path}")
         return hp.read_map(path.as_posix(), verbose=False)
 
-    T = _read_map_if_present("T_map")
-    Q = _read_map_if_present("Q_map")
-    U = _read_map_if_present("U_map")
+    # Läs T/Q/U
+    T = load_map("T_map")
+    Q = load_map("Q_map")
+    U = load_map("U_map")
 
-    # Mask är frivillig men starkt rekommenderad
+    # Läs mask om definierad
     mask = None
-    mask_name = meta.get("mask") or files.get("mask")
-    if mask_name:
-        mask_path = data_root / mask_name
+    if "mask" in meta:
+        mask_path = data_root / meta["mask"]
         if not mask_path.exists():
-            raise FileNotFoundError(f"CMB-maskfil saknas: {mask_path}")
+            raise FileNotFoundError(f"Maskfil saknas: {mask_path}")
         mask = hp.read_map(mask_path.as_posix(), verbose=False).astype(bool)
 
     return {
