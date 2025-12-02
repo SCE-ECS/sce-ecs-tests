@@ -1,0 +1,25 @@
+# TEMPLATE: Planck PR4-like CMB dataset configuration
+# Kopiera denna fil och anpassa efter din Planck PR4-liknande dataset.
+
+dataset: "Planck_PR4_Custom"
+domain: "cmb"
+
+data_root: "data/Planck_pr4"
+
+files:
+  T_map: "raw/pr4_smica_T.fits"
+  Q_map: "raw/pr4_smica_Q.fits"
+  U_map: "raw/pr4_smica_U.fits"
+
+metadata:
+  nside: 2048
+  component_separation: "SMICA"
+  frequency_ghz: 143
+  beam_fwhm_arcmin: 5.0
+  coordinate_frame: "galactic"
+  mask: "processed/planck_common_mask.fits"
+
+lfde:
+  ks_values: [50, 100, 200, 400, 800, 1600]
+  output_csv: "results/user_submitted_runs/planckpr4_custom_lfde.csv"
+  output_plot: "results/user_submitted_runs/planckpr4_custom_lfde.png"
