@@ -1,3 +1,15 @@
+#!/usr/bin/env python
+import argparse
+from pathlib import Path
+import numpy as np
+
+from sceecs_tests.config import load_config
+from metrics.lfde_reciprocity import (
+    compute_lfde_reciprocity,
+    save_lfde_results,
+)
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Run LFDE reciprocity test for HIT.",
