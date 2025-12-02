@@ -5,10 +5,11 @@ from pathlib import Path
 import numpy as np
 
 from sceecs_tests.config import load_config
-from sceecs_tests.metrics.lfde_reciprocity import (
+from metrics.lfde_reciprocity import (
     compute_lfde_reciprocity,
     save_lfde_results,
 )
+
 
 def load_hit_field(cfg):
     """
@@ -20,9 +21,9 @@ def load_hit_field(cfg):
     vel_path = data_root / vel_rel_path
 
     # Just nu: ignorera vel_path och skapa syntetiskt fält.
-    # När vi kopplar på din riktiga HIT-avatar ersätter vi detta.
     field = np.random.randn(64, 64, 64)
     return field
+
 
 def main():
     parser = argparse.ArgumentParser(description="Run LFDE reciprocity test for HIT.")
@@ -45,6 +46,7 @@ def main():
 
     print(f"Saved CSV to {output_csv}")
     print(f"Saved plot to {output_plot}")
+
 
 if __name__ == "__main__":
     main()
