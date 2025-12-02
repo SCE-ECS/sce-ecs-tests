@@ -1,0 +1,28 @@
+dataset: "WMAP_Wband_TQU"
+domain: "cmb"
+
+# Rotmappen där användaren lägger WMAP-filerna
+data_root: "data/WMAP"
+
+files:
+  T_map: "raw/wmap_W_T.fits"
+  Q_map: "raw/wmap_W_Q.fits"
+  U_map: "raw/wmap_W_U.fits"
+
+metadata:
+  # Standard för WMAP W-band
+  nside: 512
+  band: "W"
+  frequency_ghz: 94
+  beam_fwhm_arcmin: 13.2
+  coordinate_frame: "galactic"
+
+  # Vi lägger mask i processed/
+  mask: "processed/kq85_mask.fits"
+
+lfde:
+  # Dessa värden är bara demonstrativa; du kan ändra sen.
+  ks_values: [20, 40, 80, 160, 320, 640]
+
+  output_csv: "results/user_submitted_runs/wmap_wband_lfde.csv"
+  output_plot: "results/user_submitted_runs/wmap_wband_lfde.png"
